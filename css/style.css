@@ -1,0 +1,1741 @@
+/* ==========================================
+   勤怠管理システム - 整理されたCSS（最新版）
+   ========================================== */
+
+/* カスタムプロパティ（必要なもののみ） */
+:root {
+    --primary-color: #007bff;
+    --success-color: #28a745;
+    --danger-color: #dc3545;
+    --warning-color: #ffc107;
+    --info-color: #17a2b8;
+    --light-bg: #f8f9fa;
+    --dark-text: #495057;
+    --border-radius: 10px;
+    --box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    --transition: all 0.3s ease;
+}
+
+/* 基本レイアウト */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--light-bg);
+    margin: 0;
+    padding: 0;
+    line-height: 1.4;
+}
+
+/* ナビゲーションバー */
+.navbar {
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* ログアウトボタン無効化時 */
+#logoutBtn:disabled {
+    background-color: #6c757d;
+    border-color: #6c757d;
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+#logoutBtn:disabled:hover {
+    background-color: #6c757d;
+    border-color: #6c757d;
+    transform: none;
+}
+
+/* 時刻表示 */
+.current-time {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin-bottom: 5px;
+}
+
+/* 出退勤ボタン */
+.btn-clock {
+    font-size: 1rem;
+    padding: 12px 20px;
+    border-radius: 25px;
+    font-weight: 600;
+    transition: var(--transition);
+    box-shadow: var(--box-shadow);
+    border: none;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.btn-clock-in {
+    background: linear-gradient(135deg, var(--success-color), #1e7e34);
+    color: white;
+}
+
+.btn-clock-in:hover {
+    background: linear-gradient(135deg, #218838, #155724);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(40, 167, 69, 0.4);
+    color: white;
+}
+
+.btn-clock-out {
+    background: linear-gradient(135deg, var(--danger-color), #bd2130);
+    color: white;
+}
+
+.btn-clock-out:hover {
+    background: linear-gradient(135deg, #c82333, #a71e2a);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(220, 53, 69, 0.4);
+    color: white;
+}
+
+/* 出勤状況カード（縦幅縮小） */
+.status-card {
+    background: white;
+    border-radius: var(--border-radius);
+    padding: 15px;
+    margin-bottom: 15px;
+    box-shadow: var(--box-shadow);
+    border-left: 4px solid var(--info-color);
+}
+
+.status-working {
+    border-left-color: var(--success-color);
+    background: linear-gradient(135deg, #d4edda, #c3e6cb);
+}
+
+.status-completed {
+    border-left-color: var(--info-color);
+    background: linear-gradient(135deg, #d1ecf1, #bee5eb);
+}
+
+/* カスタムカード */
+.custom-card {
+    background: white;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    margin-bottom: 20px;
+}
+
+.custom-card-header {
+    background: linear-gradient(135deg, var(--primary-color), #0056b3);
+    color: white;
+    padding: 15px 20px;
+    border-radius: var(--border-radius) var(--border-radius) 0 0;
+}
+
+.report-title {
+    background: linear-gradient(135deg, var(--primary-color), #0056b3);
+    color: white;
+    padding: 15px 20px;
+    border-radius: var(--border-radius) var(--border-radius) 0 0;
+    font-weight: 600;
+}
+
+/* 日報フォーム */
+.report-form {
+    background: white;
+    border-radius: var(--border-radius);
+    padding: 20px;
+    box-shadow: var(--box-shadow);
+}
+
+/* フォーム要素 */
+.form-control {
+    border-radius: 6px;
+    border: 2px solid #e9ecef;
+    transition: var(--transition);
+    padding: 10px 15px;
+    font-size: 14px;
+    background-color: white;
+    line-height: 1.4;
+}
+
+.form-control:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 0.15rem rgba(0,123,255,0.2);
+    outline: none;
+}
+
+.form-control-lg {
+    padding: 12px 18px;
+    font-size: 16px;
+}
+
+/* セレクトボックス */
+select.form-control {
+    cursor: pointer;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e");
+    background-position: right 10px center;
+    background-repeat: no-repeat;
+    background-size: 14px;
+    padding-right: 35px;
+    appearance: none;
+}
+
+select.form-control:focus {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%23007bff' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e");
+}
+
+/* フォームラベル */
+.form-label {
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: var(--dark-text);
+    display: block;
+}
+
+/* 横並びレイアウト（Bootstrapグリッド使用に変更） */
+.form-row {
+    margin-bottom: 20px;
+}
+
+.form-row .col {
+    padding-left: 8px;
+    padding-right: 8px;
+}
+
+/* 時間選択 */
+.time-selector {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.time-select {
+    padding: 8px 12px;
+    border: 2px solid #e9ecef;
+    border-radius: 5px;
+    background: white;
+    font-size: 14px;
+    cursor: pointer;
+    transition: var(--transition);
+    min-width: 70px;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e");
+    background-position: right 6px center;
+    background-repeat: no-repeat;
+    background-size: 10px;
+    padding-right: 25px;
+}
+
+.time-select:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 0.15rem rgba(0,123,255,0.2);
+    outline: none;
+}
+
+.time-selector-large {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.time-select-large {
+    padding: 10px 15px;
+    border: 2px solid #e9ecef;
+    border-radius: 6px;
+    background: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: var(--transition);
+    min-width: 80px;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e");
+    background-position: right 8px center;
+    background-repeat: no-repeat;
+    background-size: 12px;
+    padding-right: 30px;
+}
+
+.time-select-large:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 0.15rem rgba(0,123,255,0.2);
+    outline: none;
+}
+
+.time-separator {
+    font-weight: bold;
+    font-size: 18px;
+    color: var(--dark-text);
+}
+
+/* 勤務時間表示（縦幅縮小） */
+.work-times {
+    background: #f8f9fa;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 20px;
+}
+
+.work-time-item {
+    text-align: center;
+}
+
+.work-time-label {
+    font-size: 12px;
+    color: #666;
+    margin-bottom: 5px;
+    font-weight: 600;
+}
+
+.work-time-value {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--primary-color);
+}
+
+/* カレンダー（小さくコンパクトに） */
+.calendar-container {
+    background: white;
+    border-radius: var(--border-radius);
+    padding: 12px;
+    box-shadow: var(--box-shadow);
+    margin-bottom: 15px;
+}
+
+.calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid #e9ecef;
+}
+
+.calendar-nav-btn {
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: var(--transition);
+    font-size: 12px;
+}
+
+.calendar-nav-btn:hover {
+    background: #0056b3;
+    transform: scale(1.1);
+}
+
+.calendar-title {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--dark-text);
+}
+
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 1px;
+    background: #e9ecef;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.calendar-day-header {
+    background: var(--primary-color);
+    color: white;
+    padding: 6px 2px;
+    text-align: center;
+    font-weight: 600;
+    font-size: 11px;
+}
+
+.calendar-day {
+    background: white;
+    padding: 6px 2px;
+    min-height: 32px;
+    cursor: pointer;
+    transition: var(--transition);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.calendar-day:hover {
+    background: #f8f9fa;
+    transform: translateY(-1px);
+}
+
+.calendar-day.other-month {
+    background: #f8f9fa;
+    color: #ccc;
+    cursor: default;
+}
+
+.calendar-day.has-work {
+    background: #d4edda;
+}
+
+.calendar-day.has-comment {
+    background: #fff3cd;
+}
+
+.calendar-day.has-both {
+    background: #d1ecf1;
+}
+
+.calendar-day.today {
+    background: var(--primary-color);
+    color: white;
+    font-weight: bold;
+}
+
+.calendar-day.today.has-work {
+    background: linear-gradient(135deg, var(--primary-color), var(--success-color));
+}
+
+.calendar-day-number {
+    font-weight: 600;
+    font-size: 11px;
+    margin-bottom: 2px;
+}
+
+.calendar-day-indicators {
+    display: flex;
+    gap: 2px;
+}
+
+.calendar-indicator {
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+}
+
+.indicator-work {
+    background: var(--success-color);
+}
+
+.indicator-comment {
+    background: var(--warning-color);
+}
+
+.indicator-break {
+    background: var(--info-color);
+}
+
+/* ローディング */
+.loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.95);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    flex-direction: column;
+}
+
+/* 通知 */
+.notification-area {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+    min-width: 300px;
+}
+
+.notification {
+    margin-bottom: 10px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    animation: slideIn 0.3s ease;
+    font-size: 14px;
+}
+
+@keyframes slideIn {
+    from { 
+        transform: translateX(100%); 
+        opacity: 0; 
+    }
+    to { 
+        transform: translateX(0); 
+        opacity: 1; 
+    }
+}
+
+/* 管理者専用スタイル */
+.admin-warning {
+    background: linear-gradient(135deg, #f8d7da, #f5c6cb);
+    color: #721c24;
+    padding: 15px;
+    border-radius: var(--border-radius);
+    border-left: 4px solid var(--danger-color);
+    margin-bottom: 20px;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.admin-controls {
+    background: white;
+    padding: 20px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    margin-bottom: 20px;
+}
+
+.admin-tab.active {
+    background-color: var(--primary-color);
+    color: white;
+    border-color: var(--primary-color);
+}
+
+.stat-card {
+    padding: 25px;
+    border-radius: var(--border-radius);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    box-shadow: var(--box-shadow);
+}
+
+.stat-icon {
+    font-size: 3rem;
+    margin-right: 20px;
+    opacity: 0.9;
+}
+
+.stat-info {
+    flex: 1;
+}
+
+.stat-title {
+    font-size: 14px;
+    opacity: 0.9;
+    margin-bottom: 8px;
+    font-weight: 600;
+}
+
+.stat-value {
+    font-size: 2.2rem;
+    font-weight: bold;
+    line-height: 1;
+}
+
+.info-panel {
+    background: white;
+    padding: 20px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+}
+
+.info-panel h6 {
+    color: var(--primary-color);
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+.info-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.info-list li {
+    padding: 8px 0;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.info-list li:last-child {
+    border-bottom: none;
+}
+
+.progress-item {
+    margin-bottom: 15px;
+}
+
+.progress-item label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 600;
+    color: #666;
+}
+
+/* 詳細表示 */
+.detail-section {
+    margin-bottom: 20px;
+    padding: 15px;
+    background: #f8f9fa;
+    border-radius: 8px;
+}
+
+.detail-section h6 {
+    color: var(--primary-color);
+    font-weight: 600;
+    margin-bottom: 15px;
+    border-bottom: 2px solid #e9ecef;
+    padding-bottom: 8px;
+}
+
+.detail-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+}
+
+.detail-label {
+    font-weight: 600;
+    color: #666;
+}
+
+.detail-value {
+    color: var(--dark-text);
+}
+
+.detail-content {
+    margin-top: 10px;
+    padding: 10px;
+    background: white;
+    border-radius: 6px;
+    border-left: 3px solid var(--info-color);
+}
+
+/* 過去履歴閲覧用（コンパクト版） */
+.past-report-display {
+    padding: 0;
+}
+
+.past-work-times {
+    background: #f8f9fa;
+    border-radius: 6px;
+    padding: 12px;
+    margin-bottom: 15px;
+}
+
+.past-work-times .row .col-6 {
+    text-align: center;
+}
+
+.past-work-time-label {
+    font-size: 11px;
+    color: #666;
+    margin-bottom: 3px;
+    font-weight: 600;
+}
+
+.past-work-time-value {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--primary-color);
+}
+
+.past-form-section {
+    margin-bottom: 15px;
+}
+
+.past-form-label {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--dark-text);
+    margin-bottom: 5px;
+    display: block;
+}
+
+.past-form-value {
+    background: #f8f9fa;
+    border: 1px solid #e9ecef;
+    border-radius: 4px;
+    padding: 8px 12px;
+    font-size: 14px;
+    color: var(--dark-text);
+    min-height: 38px;
+    display: flex;
+    align-items: center;
+}
+
+.past-form-textarea {
+    background: #f8f9fa;
+    border: 1px solid #e9ecef;
+    border-radius: 4px;
+    padding: 8px 12px;
+    font-size: 14px;
+    color: var(--dark-text);
+    min-height: 60px;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
+.past-health-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.past-sleep-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.staff-comment-display {
+    background: #e7f3ff;
+    border-left: 4px solid var(--info-color);
+    padding: 15px;
+    border-radius: 0 8px 8px 0;
+    margin-top: 20px;
+}
+
+.staff-comment-title {
+    color: var(--info-color);
+    font-weight: 600;
+    margin-bottom: 10px;
+    font-size: 14px;
+}
+
+.comment-box {
+    background: white;
+    padding: 12px;
+    border-radius: 6px;
+    margin-bottom: 8px;
+    border: 1px solid #dee2e6;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+/* ボタンのカスタムサイズ */
+.btn-xl {
+    font-size: 18px;
+    font-weight: 600;
+    padding: 15px 30px;
+    border-radius: 12px;
+}
+
+/* バリデーション状態 */
+.is-valid {
+    border-color: var(--success-color);
+}
+
+.is-invalid {
+    border-color: var(--danger-color);
+}
+
+.invalid-feedback {
+    display: block;
+    width: 100%;
+    margin-top: 5px;
+    font-size: 12px;
+    color: var(--danger-color);
+}
+
+/* ユーティリティクラス */
+.visually-hidden {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    padding: 0 !important;
+    margin: -1px !important;
+    overflow: hidden !important;
+    clip: rect(0, 0, 0, 0) !important;
+    white-space: nowrap !important;
+    border: 0 !important;
+}
+
+/* フォーカス時のアクセシビリティ */
+button:focus,
+.btn:focus,
+.form-control:focus,
+.calendar-day:focus {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 2px;
+}
+
+/* ==========================================
+   スタッフ機能専用スタイル
+   ========================================== */
+
+/* スタッフメニュー */
+.staff-menu {
+    margin-bottom: 25px;
+}
+
+.staff-menu-btn {
+    padding: 12px 20px;
+    font-weight: 600;
+    transition: var(--transition);
+    border-radius: 0;
+}
+
+.staff-menu-btn:first-child {
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+}
+
+.staff-menu-btn:last-child {
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+}
+
+.staff-menu-btn.active {
+    background: linear-gradient(135deg, var(--primary-color), #0056b3);
+    color: white;
+    border-color: var(--primary-color);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 15px rgba(13, 110, 253, 0.3);
+}
+
+.staff-menu-btn:hover:not(.active) {
+    background-color: rgba(13, 110, 253, 0.1);
+    transform: translateY(-1px);
+}
+
+/* スタッフセクション */
+.staff-section {
+    animation: fadeInSection 0.3s ease;
+}
+
+@keyframes fadeInSection {
+    from { 
+        opacity: 0; 
+        transform: translateY(15px); 
+    }
+    to { 
+        opacity: 1; 
+        transform: translateY(0); 
+    }
+}
+
+/* 利用者ステータスカード */
+.user-status-grid {
+    margin-top: 10px;
+}
+
+.user-status-card {
+    border: 2px solid #e9ecef;
+    border-radius: var(--border-radius);
+    padding: 20px;
+    background: white;
+    transition: var(--transition);
+    margin-bottom: 20px;
+    position: relative;
+    overflow: hidden;
+}
+
+.user-status-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background: #e9ecef;
+    transition: var(--transition);
+}
+
+.user-status-card.status-working {
+    border-color: var(--success-color);
+    background: linear-gradient(135deg, #d4edda, #c3e6cb);
+}
+
+.user-status-card.status-working::before {
+    background: var(--success-color);
+}
+
+.user-status-card.status-completed {
+    border-color: var(--info-color);
+    background: linear-gradient(135deg, #d1ecf1, #bee5eb);
+}
+
+.user-status-card.status-completed::before {
+    background: var(--info-color);
+}
+
+.user-status-card.status-not-working {
+    border-color: #6c757d;
+    background: #f8f9fa;
+}
+
+.user-status-card.status-not-working::before {
+    background: #6c757d;
+}
+
+.user-status-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+}
+
+.user-status-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+}
+
+.user-status-header h6 {
+    margin: 0;
+    font-weight: 700;
+    color: var(--dark-text);
+}
+
+.status-badge {
+    font-size: 0.875rem;
+    font-weight: 600;
+    padding: 4px 8px;
+    border-radius: 12px;
+    background: rgba(0,0,0,0.1);
+}
+
+.user-status-body {
+    font-size: 14px;
+}
+
+.user-status-body .badge {
+    margin-right: 8px;
+    margin-bottom: 8px;
+    font-size: 0.75rem;
+    padding: 4px 8px;
+}
+
+/* 申し送り事項 */
+.handover-section {
+    background: white;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    margin-bottom: 20px;
+}
+
+#handoverContent {
+    font-family: 'Menlo', 'Monaco', 'Consolas', 'Liberation Mono', 'Courier New', monospace;
+    line-height: 1.6;
+    resize: vertical;
+    min-height: 180px;
+    border: 2px solid #e9ecef;
+    transition: var(--transition);
+}
+
+#handoverContent:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 0.15rem rgba(13, 110, 253, 0.15);
+}
+
+/* クイック申し送り事項の改善（行数増加対応） */
+#quickHandoverContent {
+    min-height: 180px;
+    resize: vertical;
+}
+
+.handover-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-top: 1px solid #e9ecef;
+    margin-top: 15px;
+}
+
+/* 休憩管理 */
+.break-section {
+    background: white;
+    border-radius: var(--border-radius);
+    padding: 20px;
+    box-shadow: var(--box-shadow);
+}
+
+.break-timer {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    text-align: center;
+    margin: 15px 0;
+}
+
+.break-warning {
+    color: var(--warning-color);
+    font-weight: 600;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% { opacity: 1; }
+    50% { opacity: 0.7; }
+    100% { opacity: 1; }
+}
+
+.break-history {
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px solid #e9ecef;
+}
+
+.break-history ul {
+    max-height: 120px;
+    overflow-y: auto;
+    margin-bottom: 10px;
+}
+
+/* コメントモーダル */
+.comment-modal .modal-dialog {
+    max-width: 800px;
+}
+
+.report-summary {
+    background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+    padding: 20px;
+    border-radius: 8px;
+    border: 1px solid #dee2e6;
+    margin-bottom: 20px;
+}
+
+.report-summary .row > div {
+    margin-bottom: 15px;
+}
+
+.text-content {
+    background: white;
+    padding: 12px 16px;
+    border-radius: 6px;
+    border-left: 4px solid var(--primary-color);
+    font-size: 0.95rem;
+    line-height: 1.5;
+    color: var(--dark-text);
+    margin-top: 8px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+#staffCommentText {
+    border: 2px solid #e9ecef;
+    transition: var(--transition);
+    font-family: inherit;
+    line-height: 1.5;
+}
+
+#staffCommentText:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 0.15rem rgba(13, 110, 253, 0.15);
+}
+
+.comment-char-count {
+    text-align: right;
+    margin-top: 5px;
+}
+
+/* ダッシュボード更新アニメーション */
+.dashboard-updating {
+    opacity: 0.7;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.update-spinner {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    border: 2px solid #f3f3f3;
+    border-top: 2px solid var(--primary-color);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-left: 8px;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* 通知スタイル（スタッフ特有） */
+.staff-notification {
+    background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+    border-left: 4px solid var(--info-color);
+    color: #0d47a1;
+    font-weight: 600;
+}
+
+.staff-notification .notification-icon {
+    font-size: 1.2rem;
+    margin-right: 10px;
+}
+
+/* 利用者状況行 */
+.user-status-row {
+    background: white;
+    border: 2px solid #e9ecef !important;
+    transition: all 0.2s ease;
+}
+
+.user-status-row:hover {
+    border-color: #007bff !important;
+    box-shadow: 0 2px 8px rgba(0,123,255,0.15);
+    transform: translateY(-1px);
+}
+
+/* 時間表示 */
+.time-display {
+    text-align: center;
+}
+
+.time-display i {
+    font-size: 1.2rem;
+    margin-bottom: 4px;
+    display: block;
+}
+
+.time-display .fw-bold {
+    font-size: 1.1rem;
+    color: #495057;
+    margin-bottom: 2px;
+}
+
+.time-display small {
+    font-size: 0.75rem;
+    color: #6c757d;
+}
+
+/* ダッシュボード固有のバッジ */
+.user-status-row .badge {
+    font-size: 0.8rem;
+    padding: 4px 8px;
+}
+
+.user-status-row .badge i {
+    margin-right: 4px;
+}
+
+/* スタッフコメント機能追加CSS */
+.report-summary {
+    background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+    padding: 20px;
+    border-radius: 8px;
+    border: 1px solid #dee2e6;
+    margin-bottom: 20px;
+}
+
+.report-summary h6 {
+    color: var(--primary-color);
+    margin-bottom: 15px;
+    font-weight: 600;
+    border-bottom: 2px solid #e9ecef;
+    padding-bottom: 8px;
+}
+
+/* 既存コメント表示 */
+.existing-comment-display {
+    background: #f0f8ff;
+    border: 1px solid #d1ecf1;
+    border-radius: 8px;
+    padding: 15px;
+}
+
+.comment-readonly-box {
+    background: white;
+    border: 1px solid #dee2e6;
+    border-radius: 6px;
+    padding: 12px;
+    margin: 10px 0;
+    font-size: 14px;
+    line-height: 1.5;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    min-height: 60px;
+}
+
+/* コメント編集警告 */
+.comment-edit-warning {
+    margin-top: 10px;
+}
+
+.comment-edit-warning .alert {
+    margin-bottom: 0;
+}
+
+/* スタッフコメント記入欄 */
+.staff-comment-section {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    border: 1px solid #dee2e6;
+}
+
+.staff-comment-section h6 {
+    color: var(--info-color);
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+#staffCommentText {
+    border: 2px solid #e9ecef;
+    transition: var(--transition);
+    font-family: inherit;
+    line-height: 1.5;
+    resize: vertical;
+}
+
+#staffCommentText:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 0.15rem rgba(13, 110, 253, 0.15);
+}
+
+#staffCommentText:read-only {
+    background-color: #f8f9fa;
+    color: #6c757d;
+    cursor: not-allowed;
+}
+
+.comment-char-count {
+    text-align: right;
+    margin-top: 5px;
+}
+
+.existing-comment-info {
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid #e9ecef;
+}
+
+/* バッティング回避アラート */
+.alert-warning {
+    border-left: 4px solid var(--warning-color);
+    background: linear-gradient(135deg, #fff3cd, #ffeaa7);
+}
+
+/* ダッシュボードボタンの状態 */
+.user-status-row .btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.user-status-row .btn[title] {
+    position: relative;
+}
+
+/* モーダルサイズ調整 */
+.modal-lg {
+    max-width: 900px;
+}
+
+@media (max-width: 576px) {
+    .modal-lg {
+        max-width: 95%;
+    }
+}
+
+/* スタッフ通知機能追加CSS */
+/* コメント未記入の利用者行の強調表示 */
+.user-status-row.border-warning {
+    border-color: #ffc107 !important;
+    border-width: 2px !important;
+    background: linear-gradient(135deg, #fff9e6, #fff3cd);
+    animation: alertPulse 3s ease-in-out infinite;
+}
+
+@keyframes alertPulse {
+    0%, 100% {
+        box-shadow: 0 2px 8px rgba(255, 193, 7, 0.3);
+    }
+    50% {
+        box-shadow: 0 4px 16px rgba(255, 193, 7, 0.5);
+    }
+}
+
+/* コメントバッジの改善 */
+.badge.bg-danger {
+    background: linear-gradient(135deg, #dc3545, #c82333) !important;
+    animation: warningBlink 2s ease-in-out infinite;
+}
+
+@keyframes warningBlink {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.7;
+    }
+}
+
+.badge.bg-info {
+    background: linear-gradient(135deg, #17a2b8, #138496) !important;
+}
+
+/* 通知関連のスタイル */
+.notification.alert-info {
+    background: linear-gradient(135deg, #d1ecf1, #bee5eb);
+    border-left: 4px solid #17a2b8;
+    color: #0c5460;
+    font-weight: 600;
+}
+
+.notification.alert-info i {
+    font-size: 1.2rem;
+    margin-right: 8px;
+    animation: bounce 0.5s ease-in-out;
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
+    }
+    40% {
+        transform: translateY(-5px);
+    }
+    60% {
+        transform: translateY(-3px);
+    }
+}
+
+/* ダッシュボード更新時の視覚的フィードバック */
+.dashboard-updating {
+    opacity: 0.7;
+    transition: opacity 0.3s ease;
+}
+
+.dashboard-updating::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 20px;
+    height: 20px;
+    margin: -10px 0 0 -10px;
+    border: 2px solid #f3f3f3;
+    border-top: 2px solid #007bff;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+/* 緊急度の高いバッジ */
+.badge i[class*="exclamation"] {
+    animation: shake 0.5s ease-in-out infinite;
+}
+
+@keyframes shake {
+    0%, 100% {
+        transform: translateX(0);
+    }
+    25% {
+        transform: translateX(-2px);
+    }
+    75% {
+        transform: translateX(2px);
+    }
+}
+
+/* スタッフ休憩機能追加CSS */
+/* 休憩時間表示 */
+#breakTimeDisplay {
+    background: linear-gradient(135deg, #fff3cd, #ffeaa7);
+    padding: 8px 12px;
+    border-radius: 6px;
+    border-left: 4px solid #ffc107;
+    font-family: 'Courier New', monospace;
+}
+
+#breakDuration {
+    font-weight: bold;
+    font-size: 1.1rem;
+    color: #856404;
+}
+
+/* 休憩ボタンの状態 */
+.btn-warning.btn-danger {
+    background: linear-gradient(135deg, #dc3545, #c82333) !important;
+    border-color: #dc3545 !important;
+    animation: urgentPulse 1s ease-in-out infinite;
+}
+
+@keyframes urgentPulse {
+    0%, 100% {
+        box-shadow: 0 0 0 0 rgba(220, 53, 69, 0.7);
+    }
+    50% {
+        box-shadow: 0 0 0 10px rgba(220, 53, 69, 0);
+    }
+}
+
+/* 休憩中ステータス */
+.status-card .text-warning {
+    animation: breakBlink 2s ease-in-out infinite;
+}
+
+@keyframes breakBlink {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.7;
+    }
+}
+
+/* 休憩終了ボタン（緊急） */
+.btn-danger .fa-exclamation-triangle {
+    animation: shake 0.5s ease-in-out infinite;
+}
+
+/* ダッシュボード自動更新インジケーター */
+.dashboard-auto-update {
+    position: relative;
+}
+
+.dashboard-auto-update::after {
+    content: '自動更新中';
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background: #28a745;
+    color: white;
+    font-size: 0.7rem;
+    padding: 2px 6px;
+    border-radius: 10px;
+    animation: fadeInOut 3s ease-in-out infinite;
+}
+
+@keyframes fadeInOut {
+    0%, 100% {
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+    }
+}
+
+/* 休憩記録一覧 */
+.break-records {
+    background: #f8f9fa;
+    border-radius: 6px;
+    padding: 10px;
+    margin-top: 10px;
+}
+
+.break-record-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 0;
+    border-bottom: 1px solid #e9ecef;
+    font-size: 0.9rem;
+}
+
+.break-record-item:last-child {
+    border-bottom: none;
+}
+
+.break-record-time {
+    font-weight: bold;
+    color: #495057;
+}
+
+.break-record-duration {
+    color: #6c757d;
+    font-family: 'Courier New', monospace;
+}
+
+/* ==========================================
+   管理者機能専用スタイル（新仕様）
+   ========================================== */
+
+/* 管理者メニュー（staffベース） */
+.admin-menu-btn {
+    padding: 12px 20px;
+    font-weight: 600;
+    transition: var(--transition);
+    border-radius: 0;
+}
+
+.admin-menu-btn:first-child {
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+}
+
+.admin-menu-btn:last-child {
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+}
+
+.admin-menu-btn.active {
+    background: linear-gradient(135deg, var(--primary-color), #0056b3);
+    color: white;
+    border-color: var(--primary-color);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 15px rgba(13, 110, 253, 0.3);
+}
+
+.admin-menu-btn:hover:not(.active) {
+    background-color: rgba(13, 110, 253, 0.1);
+    transform: translateY(-1px);
+}
+
+/* 管理者セクション */
+.admin-section {
+    animation: fadeInSection 0.3s ease;
+}
+
+/* ユーザー登録フォーム */
+.user-registration-form {
+    background: white;
+    border-radius: var(--border-radius);
+    padding: 25px;
+    box-shadow: var(--box-shadow);
+}
+
+.user-registration-form .form-label {
+    font-weight: 600;
+    color: var(--dark-text);
+    margin-bottom: 8px;
+}
+
+.user-registration-form .form-control {
+    border: 2px solid #e9ecef;
+    border-radius: 6px;
+    padding: 12px 15px;
+    transition: var(--transition);
+}
+
+.user-registration-form .form-control:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 0.15rem rgba(13, 110, 253, 0.15);
+}
+
+/* 既存ユーザー一覧テーブル */
+.existing-users-table {
+    background: white;
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    box-shadow: var(--box-shadow);
+}
+
+.existing-users-table .table {
+    margin-bottom: 0;
+}
+
+.existing-users-table .table th {
+    background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+    font-weight: 600;
+    color: var(--dark-text);
+    border-bottom: 2px solid #dee2e6;
+}
+
+.existing-users-table .table td {
+    vertical-align: middle;
+    padding: 12px;
+}
+
+/* 日別出勤記録モーダル */
+.daily-attendance-list {
+    padding: 0;
+}
+
+.daily-attendance-list .table {
+    margin-bottom: 0;
+}
+
+.daily-attendance-list .table th {
+    background: linear-gradient(135deg, var(--primary-color), #0056b3);
+    color: white;
+    font-weight: 600;
+    text-align: center;
+    border-color: var(--primary-color);
+}
+
+.daily-attendance-list .table td {
+    text-align: center;
+    vertical-align: middle;
+    padding: 12px 8px;
+}
+
+.daily-attendance-list .table td:nth-child(3) {
+    text-align: left;
+    font-weight: 600;
+}
+
+/* カレンダーの出勤者数表示 */
+.attendance-count {
+    font-size: 0.7rem;
+    color: var(--primary-color);
+    font-weight: 600;
+    background: rgba(13, 110, 253, 0.1);
+    border-radius: 8px;
+    padding: 1px 4px;
+    margin-top: 2px;
+}
+
+/* 全体出勤状況 */
+.all-user-status {
+    background: white;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+}
+
+.all-user-status .user-status-row {
+    transition: var(--transition);
+    border: 2px solid #f8f9fa !important;
+}
+
+.all-user-status .user-status-row:hover {
+    border-color: var(--primary-color) !important;
+    box-shadow: 0 4px 15px rgba(13, 110, 253, 0.1);
+    transform: translateY(-1px);
+}
+
+/* 権限・サービス区分バッジ */
+.role-badge {
+    font-size: 0.8rem;
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-weight: 600;
+}
+
+.service-badge {
+    font-size: 0.75rem;
+    padding: 3px 6px;
+    border-radius: 8px;
+    margin-left: 4px;
+}
+
+/* ユーザー登録成功アニメーション */
+.user-registered {
+    animation: successPulse 0.6s ease-in-out;
+}
+
+@keyframes successPulse {
+    0% {
+        background-color: transparent;
+    }
+    50% {
+        background-color: rgba(40, 167, 69, 0.1);
+    }
+    100% {
+        background-color: transparent;
+    }
+}
+
+/* フォームバリデーション強化 */
+.form-control.is-invalid {
+    border-color: var(--danger-color);
+    box-shadow: 0 0 0 0.15rem rgba(220, 53, 69, 0.15);
+}
+
+.form-control.is-valid {
+    border-color: var(--success-color);
+    box-shadow: 0 0 0 0.15rem rgba(40, 167, 69, 0.15);
+}
+
+/* 管理者ダッシュボード統計 */
+.admin-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    margin-bottom: 25px;
+}
+
+.admin-stat-card {
+    background: white;
+    border-radius: var(--border-radius);
+    padding: 20px;
+    box-shadow: var(--box-shadow);
+    text-align: center;
+    border-left: 4px solid var(--primary-color);
+}
+
+.admin-stat-number {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin-bottom: 8px;
+}
+
+.admin-stat-label {
+    color: var(--dark-text);
+    font-weight: 600;
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 768px) {
+    .admin-menu-btn {
+        padding: 8px 12px;
+        font-size: 0.9rem;
+    }
+    
+    .daily-attendance-list .table {
+        font-size: 0.85rem;
+    }
+    
+    .daily-attendance-list .table th,
+    .daily-attendance-list .table td {
+        padding: 8px 4px;
+    }
+    
+    .user-status-row .col-md-2,
+    .user-status-row .col-md-3 {
+        margin-bottom: 10px;
+    }
+}
+
+/* モーダルサイズ調整 */
+.modal-xl {
+    max-width: 1200px;
+}
+
+@media (max-width: 576px) {
+    .modal-xl {
+        max-width: 95%;
+    }
+}
+
+/* スタッフ出勤記録詳細 */
+.staff-attendance-detail {
+    padding: 0;
+}
+
+.staff-attendance-detail .detail-section {
+    margin-bottom: 20px;
+    padding: 15px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    border-left: 3px solid var(--primary-color);
+}
+
+.staff-attendance-detail .detail-section.bg-light {
+    background: linear-gradient(135deg, #e3f2fd, #bbdefb) !important;
+    border-left-color: var(--primary-color);
+}
+
+.staff-attendance-detail .detail-section h6 {
+    color: var(--primary-color);
+    font-weight: 600;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #e9ecef;
+    padding-bottom: 5px;
+}
+
+.staff-attendance-detail .detail-value {
+    font-weight: bold;
+    margin: 5px 0;
+}
+
+.staff-attendance-detail .break-records {
+    background: white;
+    border: 1px solid #dee2e6;
+}
+
+.staff-attendance-detail .break-record-item {
+    padding: 12px 0;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.staff-attendance-detail .break-record-item:last-child {
+    border-bottom: none;
+}
+
+.staff-attendance-detail .break-record-time {
+    font-size: 1rem;
+    color: var(--primary-color);
+}
+
+.staff-attendance-detail .break-record-duration {
+    font-size: 1rem;
+    color: var(--info-color);
+    font-weight: 600;
+}

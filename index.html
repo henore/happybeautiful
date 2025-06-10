@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>勤怠管理システム</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    
+    <!-- カスタムCSS -->
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+    <!-- セキュリティチェック -->
+    <div id="securityCheck" class="loading-overlay">
+        <div class="text-center">
+            <div class="spinner-border text-primary mb-3" role="status"></div>
+            <h5>システム初期化中...</h5>
+            <p class="text-muted" id="securityStatus">環境を確認しています...</p>
+        </div>
+    </div>
+
+    <!-- スタッフコメント確認モーダル -->
+    <div class="modal fade" id="staffCommentModal" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header bg-primary text-white">
+                    <h5 class="modal-title">
+                        <i class="fas fa-comments"></i> 前回のスタッフコメント
+                    </h5>
+                </div>
+                <div class="modal-body">
+                    <div class="alert alert-info">
+                        <i class="fas fa-info-circle"></i> 前回出勤時のスタッフからのコメントを確認してください
+                    </div>
+                    <div id="previousStaffComments">
+                        <p class="text-muted">コメントを読み込み中...</p>
+                    </div>
+                    <hr>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="commentReadCheck">
+                        <label class="form-check-label" for="commentReadCheck">
+                            <strong>スタッフコメントを確認しました</strong>
+                        </label>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" id="commentConfirmBtn" disabled>
+                        <i class="fas fa-check"></i> 確認完了
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 日報詳細モーダル -->
+    <div class="modal fade" id="reportDetailModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="reportDetailTitle">
+                        <i class="fas fa-file-alt"></i> 日報詳細
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body" id="reportDetailContent">
+                    <!-- 過去の日報内容がここに表示される -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ローディング -->
+    <div id="loading" class="loading-overlay" style="display: none;">
+        <div class="spinner-border text-primary" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>
+
+    <!-- ナビゲーション -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <i class="fas fa-clock"></i> 勤怠管理システム
+            </a>
+            <div class="navbar-nav ms-auto">
+                <span class="navbar-text me-3" id="currentUser"></span>
+                <span class="navbar-text me-3" id="systemStatus">
+                    <i class="fas fa-shield-check text-success"></i> <small>セキュア</small>
+                </span>
+                <button class="btn btn-outline-light" id="logoutBtn" style="display: none;">
+                    <i class="fas fa-sign-out-alt"></i> ログアウト
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- メインコンテンツエリア -->
+    <div class="container mt-4">
+        <!-- 現在時刻表示 -->
+        <div class="text-center mb-4" id="timeDisplay">
+            <div class="current-time" id="currentTime"></div>
+            <div class="text-muted" id="currentDate"></div>
+        </div>
+
+        <!-- 動的コンテンツエリア（中央揃え） -->
+        <div class="row justify-content-center">
+            <div class="col-lg-10 col-xl-8">
+                <div id="app-content">
+                    <!-- 各画面がここに動的に挿入される -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 通知エリア -->
+    <div id="notifications" class="notification-area"></div>
+
+    <!-- 日報詳細モーダル -->
+    <div class="modal fade" id="reportDetailModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="reportDetailTitle">
+                        <i class="fas fa-file-alt"></i> 日報詳細
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body" id="reportDetailContent">
+                    <!-- 過去の日報内容がここに表示される -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- スタッフコメント記入モーダル -->
+<div class="modal fade" id="staffCommentModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header bg-info text-white">
+                <h5 class="modal-title" id="staffCommentModalTitle">
+                    <i class="fas fa-comment-plus"></i> 日報にコメント記入
+                </h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body" id="staffCommentModalContent">
+                <!-- 動的にコンテンツが挿入される -->
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                    <i class="fas fa-times"></i> キャンセル
+                </button>
+                <button type="button" class="btn btn-primary" id="saveStaffCommentBtn">
+                    <i class="fas fa-save"></i> 保存
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+    <!-- Bootstrap JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- メインアプリケーション（ES6モジュール） -->
+    <script type="module" src="./js/main.js"></script>
+</body>
+</html>
